@@ -4,6 +4,19 @@ Read this reference only when the Idea to Page MCP has not been configured.
 
 ## Install the skill
 
+The recommended cross-agent installer is:
+
+```bash
+npx skills add lucasapassos/idea-to-page-skills
+```
+
+Select `idea-to-page-mcp` when prompted. For a non-interactive global
+installation, use:
+
+```bash
+npx skills add lucasapassos/idea-to-page-skills --skill idea-to-page-mcp -g
+```
+
 Ask the agent to install:
 
 ```text
