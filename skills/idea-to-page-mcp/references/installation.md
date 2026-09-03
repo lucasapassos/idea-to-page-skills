@@ -4,11 +4,20 @@ Read this reference only when the Idea to Page MCP has not been configured.
 
 ## Install the skill
 
-Install this repository with the skill installation mechanism supported by the
-agent client. For Codex, users can request installation from the GitHub
-repository path after it is published, selecting:
+Ask the agent to install:
 
-`skills/idea-to-page-mcp`
+```text
+Install the idea-to-page-mcp skill from
+https://github.com/lucasapassos/idea-to-page-skills,
+using the path skills/idea-to-page-mcp.
+```
+
+For Codex, use `$skill-installer` when explicit skill routing is available.
+The installation coordinates are:
+
+- Repository: `https://github.com/lucasapassos/idea-to-page-skills`
+- Path: `skills/idea-to-page-mcp`
+- Name: `idea-to-page-mcp`
 
 Restart or reload the client if it does not discover newly installed skills
 automatically.

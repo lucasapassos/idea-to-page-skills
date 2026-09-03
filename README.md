@@ -15,13 +15,81 @@ private SDK documentation or accept credentials.
 
 ## Install
 
-Install the skill from this repository path:
+### `npx skills` (recommended)
 
-`skills/idea-to-page-mcp`
+Works with Claude Code, OpenCode, Codex, Cursor, and 70+ other agents:
 
-With an agent that supports skill installation from GitHub, provide the
-repository URL and the path above. After installation, invoke
-`$idea-to-page-mcp` or ask the agent to connect to the Idea to Page MCP.
+```bash
+npx skills add lucasapassos/idea-to-page-skills
+```
+
+Then select `idea-to-page-mcp` when prompted. To skip the prompts:
+
+```bash
+# Project scope, specific agent
+npx skills add lucasapassos/idea-to-page-skills --skill idea-to-page-mcp -a claude-code
+
+# Global scope (all projects)
+npx skills add lucasapassos/idea-to-page-skills --skill idea-to-page-mcp -g
+```
+
+Update later with `npx skills update idea-to-page-mcp`.
+
+### Ask your agent
+
+Send this instruction to an agent that can install skills:
+
+```text
+Install the idea-to-page-mcp skill from
+https://github.com/lucasapassos/idea-to-page-skills,
+using the path skills/idea-to-page-mcp.
+```
+
+In Codex, explicitly ask it to use `$skill-installer` for this request.
+
+### Claude Code
+
+Install globally (all projects):
+
+```bash
+mkdir -p ~/.claude/skills
+git clone https://github.com/lucasapassos/idea-to-page-skills.git /tmp/idea-to-page-skills
+cp -r /tmp/idea-to-page-skills/skills/idea-to-page-mcp ~/.claude/skills/
+```
+
+Or install for a single project:
+
+```bash
+git clone https://github.com/lucasapassos/idea-to-page-skills.git /tmp/idea-to-page-skills
+mkdir -p .claude/skills
+cp -r /tmp/idea-to-page-skills/skills/idea-to-page-mcp .claude/skills/
+```
+
+### Generic agents (`~/.agents/skills/`)
+
+```bash
+mkdir -p ~/.agents/skills
+git clone https://github.com/lucasapassos/idea-to-page-skills.git /tmp/idea-to-page-skills
+cp -r /tmp/idea-to-page-skills/skills/idea-to-page-mcp ~/.agents/skills/
+```
+
+### Other agents
+
+If your agent installs skills from a Git repository, point it at
+`https://github.com/lucasapassos/idea-to-page-skills.git` with skill path
+`skills/idea-to-page-mcp`.
+
+Repository coordinates:
+
+- Repository: `https://github.com/lucasapassos/idea-to-page-skills`
+- Skill path: `skills/idea-to-page-mcp`
+- Skill name: `idea-to-page-mcp`
+
+### After installing
+
+Invoke `$idea-to-page-mcp`, or simply ask the agent to connect to the Idea to
+Page MCP. Token configuration happens in the MCP client, not in this skill —
+see [Security](#security).
 
 ## Security
 
