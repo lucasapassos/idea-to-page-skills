@@ -1,0 +1,4 @@
+interface:
+  display_name: "Idea to Page MCP"
+  short_description: "Conecte agentes ao MCP do Idea to Page"
+  default_prompt: "Use $idea-to-page-mcp para conectar este agente ao Idea to Page e carregar a documentação autenticada."
