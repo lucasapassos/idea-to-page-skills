@@ -8,7 +8,7 @@ Public, installable agent skills for working with Idea to Page.
 
 Connects an AI agent to an Idea to Page MCP instance, verifies authenticated
 resource access, and loads the platform documentation from
-`holter://docs/llm.md`.
+`itp://docs/llm.md`.
 
 The repository contains onboarding instructions only. It does not publish the
 private SDK documentation or accept credentials.

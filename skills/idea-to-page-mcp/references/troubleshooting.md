@@ -24,7 +24,7 @@ documentation loading fails.
 
 - Reconnect so the client repeats MCP initialization.
 - Confirm initialization advertises a `resources` capability.
-- List resources and look for `holter://docs/llm.md`.
+- List resources and look for `itp://docs/llm.md`.
 - If tools work but resources do not appear, the server or client may predate
   authenticated documentation resources. Report that incompatibility; do not
   substitute guessed documentation.
@@ -39,6 +39,15 @@ documentation loading fails.
 
 ## Connection succeeds but a task fails
 
-Read the relevant artifact referenced by `holter://docs/llm.md` again and use
+Read the relevant artifact referenced by `itp://docs/llm.md` again and use
 the current tool schemas from tool discovery. The skill intentionally contains
 no copied tool or SDK contract that could drift.
+
+## Only two tools are visible
+
+If discovery returns only `search_datasets` and `prepare_page_upload`, the client
+is connected to the initial organization MCP deployment. A current server also
+advertises authenticated documentation resources and page/dataset lifecycle
+tools. Reconnect after the server is upgraded and run `initialize`,
+`resources/list`, and `tools/list` again. Do not answer that dataset creation or
+SDK documentation does not exist based on that partial list.

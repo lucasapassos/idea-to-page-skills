@@ -29,14 +29,22 @@ connection; it does not duplicate the platform SDK or operational documentation.
    [references/installation.md](references/installation.md) only when client
    setup guidance is needed.
 3. After connection, discover MCP resources and read
-   `holter://docs/llm.md` before advising on SDK behavior or changing a page.
-4. Read only the artifact resources relevant to the user's request. Follow the
+   `itp://docs/llm.md` before advising on SDK behavior or changing a page.
+4. Run tool discovery. A current organization MCP exposes the page lifecycle and
+   dataset lifecycle, including `list_pages`, `get_page_source`,
+   `prepare_page_upload`, `publish_page`, `list_dataset_connectors`,
+   `create_dataset`, `list_dataset_runs`, `preview_dataset`, and
+   `attach_dataset_page`. If only `search_datasets` and
+   `prepare_page_upload` appear, report that the connected server is an outdated
+   deployment; do not conclude that Idea to Page lacks dataset creation or SDK
+   documentation.
+5. Read only the artifact resources relevant to the user's request. Follow the
    links in the guide; relative links such as `./database.md` resolve inside
-   `holter://docs/`.
-5. Use the MCP tools according to the freshly loaded documentation. Preserve
+   `itp://docs/`.
+6. Use the MCP tools according to the freshly loaded documentation. Preserve
    normal authorization boundaries and request confirmation for destructive
    actions when the surrounding agent policy requires it.
-6. If discovery or reading fails, use
+7. If discovery or reading fails, use
    [references/troubleshooting.md](references/troubleshooting.md). Do not guess
    current tool schemas or SDK behavior from this skill.
 
@@ -45,9 +53,12 @@ connection; it does not duplicate the platform SDK or operational documentation.
 A usable connection must satisfy all of these:
 
 - MCP initialization advertises resources.
-- Resource discovery includes `holter://docs/llm.md`.
+- Resource discovery includes `itp://docs/llm.md`.
 - Reading that URI returns non-empty Markdown.
 - Tool discovery succeeds under the same authenticated connection.
+- Tool discovery includes the lifecycle tools needed for the requested task. A
+  partial tool list is a server capability/version problem, not evidence that
+  an absent operation is unsupported by the platform as a whole.
 
 Once these checks pass, continue with the user's actual task. Do not repeatedly
 reload every document; fetch the guide once and load referenced artifacts on

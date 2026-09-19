@@ -47,7 +47,7 @@ automatically.
 4. Enter the token only in the client's protected credential field or secret
    store. Do not place it in repository files, shell history, prompts, screenshots,
    issue reports, or shared configuration.
-5. Connect, list resources, and read `holter://docs/llm.md`.
+5. Connect, list resources, and read `itp://docs/llm.md`.
 
 Client configuration formats vary. Explain the required URL and Bearer header,
 but do not invent product-specific JSON when the client is unknown. Ask which
