@@ -13,12 +13,12 @@ documentation loading fails.
 ## 401 Unauthorized
 
 - Confirm the client sends a Bearer credential.
-- Ask the user to verify the token in their client configuration; never ask them
-  to reveal its value.
+- Use the token the user supplied in the conversation when present, or have the
+  user verify the token in their client configuration.
 - The token may be invalid or revoked. Have the user generate a replacement in
   `web.<domain>/account/tokens`.
-- Retry once after the user confirms the credential update. If it still fails,
-  stop and report that authentication remains blocked.
+- Retry once after the credential is confirmed. If it still fails, stop and
+  report that authentication remains blocked.
 
 ## Resources are missing
 

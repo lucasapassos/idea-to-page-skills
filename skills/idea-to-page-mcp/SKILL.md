@@ -1,6 +1,6 @@
 ---
 name: idea-to-page-mcp
-description: Connect an AI agent to an Idea to Page MCP server, verify authenticated access, load its private documentation resources, and use that documentation before creating or changing pages. Use when a user wants to install, configure, troubleshoot, or work through the Idea to Page MCP. Do not use this skill to solicit, display, store, or transmit the user's bearer token.
+description: Connect an AI agent to an Idea to Page MCP server, verify authenticated access, load its private documentation resources, and use that documentation before creating or changing pages. Use when a user wants to install, configure, troubleshoot, or work through the Idea to Page MCP, including when the user supplies the endpoint and bearer token directly in the conversation.
 ---
 
 # Idea to Page MCP
@@ -8,25 +8,33 @@ description: Connect an AI agent to an Idea to Page MCP server, verify authentic
 Use the authenticated MCP as the source of truth. This skill only bootstraps the
 connection; it does not duplicate the platform SDK or operational documentation.
 
-## Safety boundary
+## Credential handling
 
-- Never ask the user to paste a bearer token into the conversation.
-- Never print, log, commit, or place a token in a command line.
-- Have the user configure the token through the MCP client's secret or
-  credential mechanism.
-- Treat a token as compromised if it appears in chat or output. Stop and direct
-  the user to revoke it in Idea to Page before continuing.
+- The user may supply the MCP endpoint and bearer token directly in the
+  conversation. Use the supplied values to configure and authenticate the
+  connection for the current task.
+- Send the token only to the configured Idea to Page MCP endpoint. Do not
+  transmit it to any other host, service, or tool.
+- Prefer the client's protected credential store when it supports one. A token
+  supplied in the conversation is authorized for immediate use either way.
+- Do not commit the token to repository-tracked files or leave it in shell
+  history, and do not echo it back in full in summaries or logs.
 - Do not work around authentication by requesting public `/docs/*.md` URLs.
 
 ## Workflow
 
-1. Determine the instance base domain from the user's URL or deployment context.
-   The MCP endpoint is `https://api.<base-domain>/mcp`; local development
-   normally uses `http://api.localhost/mcp`.
-2. If the MCP is not connected, tell the user how to create a personal token at
-   `https://web.<base-domain>/account/tokens` and configure it as a Bearer
-   credential in their client. Read
-   [references/installation.md](references/installation.md) only when client
+1. Determine the MCP endpoint. If the user supplied a full endpoint, use it
+   verbatim (it may include an explicit port and path). Otherwise derive it from
+   the base domain: `https://api.<base-domain>/mcp`; local development normally
+   uses `http://api.localhost/mcp`.
+2. If the MCP is not connected:
+   - When the user supplied an endpoint and token in the conversation, configure
+     a Streamable HTTP MCP connection using that endpoint and
+     `Authorization: Bearer <token>`, then connect.
+   - Otherwise, tell the user how to create a personal token at
+     `https://web.<base-domain>/account/tokens` and configure it as a Bearer
+     credential in their client.
+   Read [references/installation.md](references/installation.md) when client
    setup guidance is needed.
 3. After connection, discover MCP resources and read
    `itp://docs/llm.md` before advising on SDK behavior or changing a page.

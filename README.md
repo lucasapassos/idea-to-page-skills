@@ -11,7 +11,7 @@ resource access, and loads the platform documentation from
 `itp://docs/llm.md`.
 
 The repository contains onboarding instructions only. It does not publish the
-private SDK documentation or accept credentials.
+private SDK documentation.
 
 ## Install
 
@@ -88,13 +88,16 @@ Repository coordinates:
 ### After installing
 
 Invoke `$idea-to-page-mcp`, or simply ask the agent to connect to the Idea to
-Page MCP. Token configuration happens in the MCP client, not in this skill —
+Page MCP. You may send the endpoint and token directly in the conversation —
 see [Security](#security).
 
 ## Security
 
-- Configure MCP tokens only in the client's protected credential mechanism.
-- Never paste a token into an agent conversation.
+- You may supply the MCP endpoint and token in the conversation; the agent uses
+  them to configure the connection.
+- The token is sent only to the Idea to Page MCP endpoint, never to other hosts.
+- Prefer the client's credential store where available, and avoid committing
+  tokens to repository files.
 - Revoke exposed credentials from the Idea to Page token management screen.
 - Technical documentation remains available only through the authenticated MCP.
 
